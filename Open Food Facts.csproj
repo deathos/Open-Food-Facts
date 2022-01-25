@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{30037F1D-C19D-4705-B2AF-981CF11C33EE}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Open_Food_Facts</RootNamespace>
+    <AssemblyName>Open_Food_Facts</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HoneywellPrinter">
+      <HintPath>..\..\..\..\Products\Software\SmartPrintingRK-10.16.019189(1)\SmartPrintingRK\Dll\HoneywellPrinter.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BitmapImageHandler.cs" />
+    <Compile Include="PrinterKeypadHandler.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourcesHandler.cs" />
+    <Compile Include="UsbCommunicationHandler.cs" />
+    <Compile Include="UserInterfaceHandler.cs" />
+    <Compile Include="Variables.cs" />
+    <Compile Include="WebApiHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe $(TargetFileName) ftp://192.168.1.144/apps/$(TargetFileName) user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/date.png ftp://192.168.1.144/images/date.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/languages.png ftp://192.168.1.144/images/languages.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/search.png ftp://192.168.1.144/images/search.png user pass
+
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nova-group-1.png ftp://192.168.1.144/images/nova-group-1.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nova-group-2.png ftp://192.168.1.144/images/nova-group-2.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nova-group-3.png ftp://192.168.1.144/images/nova-group-3.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nova-group-4.png ftp://192.168.1.144/images/nova-group-4.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-a.png ftp://192.168.1.144/images/nutriscore-a.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-b.png ftp://192.168.1.144/images/nutriscore-b.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-c.png ftp://192.168.1.144/images/nutriscore-c.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-d.png ftp://192.168.1.144/images/nutriscore-d.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-e.png ftp://192.168.1.144/images/nutriscore-e.png user pass
+
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nova-group-1.png ftp://192.168.1.144/images/1bit-nova-group-1.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nova-group-2.png ftp://192.168.1.144/images/1bit-nova-group-2.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nova-group-3.png ftp://192.168.1.144/images/1bit-nova-group-3.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nova-group-4.png ftp://192.168.1.144/images/1bit-nova-group-4.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-a.png ftp://192.168.1.144/images/1bit-nutriscore-a.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-b.png ftp://192.168.1.144/images/1bit-nutriscore-b.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-c.png ftp://192.168.1.144/images/1bit-nutriscore-c.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-d.png ftp://192.168.1.144/images/1bit-nutriscore-d.png user pass
+C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-e.png ftp://192.168.1.144/images/1bit-nutriscore-e.png user pass
+</PostBuildEvent>
+  </PropertyGroup>
+</Project>
