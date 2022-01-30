@@ -52,6 +52,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -84,30 +85,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe $(TargetFileName) ftp://192.168.1.144/apps/$(TargetFileName) user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/date.png ftp://192.168.1.144/images/date.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/languages.png ftp://192.168.1.144/images/languages.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/search.png ftp://192.168.1.144/images/search.png user pass
-
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nova-group-1.png ftp://192.168.1.144/images/nova-group-1.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nova-group-2.png ftp://192.168.1.144/images/nova-group-2.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nova-group-3.png ftp://192.168.1.144/images/nova-group-3.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nova-group-4.png ftp://192.168.1.144/images/nova-group-4.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-a.png ftp://192.168.1.144/images/nutriscore-a.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-b.png ftp://192.168.1.144/images/nutriscore-b.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-c.png ftp://192.168.1.144/images/nutriscore-c.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-d.png ftp://192.168.1.144/images/nutriscore-d.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/nutriscore-e.png ftp://192.168.1.144/images/nutriscore-e.png user pass
-
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nova-group-1.png ftp://192.168.1.144/images/1bit-nova-group-1.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nova-group-2.png ftp://192.168.1.144/images/1bit-nova-group-2.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nova-group-3.png ftp://192.168.1.144/images/1bit-nova-group-3.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nova-group-4.png ftp://192.168.1.144/images/1bit-nova-group-4.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-a.png ftp://192.168.1.144/images/1bit-nutriscore-a.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-b.png ftp://192.168.1.144/images/1bit-nutriscore-b.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-c.png ftp://192.168.1.144/images/1bit-nutriscore-c.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-d.png ftp://192.168.1.144/images/1bit-nutriscore-d.png user pass
-C:\Users\H399039\Desktop\SmartPrintingRK\Utils\FtpPut.exe Images/1bit-nutriscore-e.png ftp://192.168.1.144/images/1bit-nutriscore-e.png user pass
-</PostBuildEvent>
+    <PostBuildEvent>C:\SmartPrintingRK\Utils\FtpPut.exe $(TargetFileName) ftp://192.168.1.144/apps/$(TargetFileName) user pass
+C:\SmartPrintingRK\Utils\FtpPut.exe Images/search.png ftp://192.168.1.144/images/search.png user pass
+C:\SmartPrintingRK\Utils\FtpPut.exe Images/db_search.png ftp://192.168.1.144/images/db_search.png user pass
+C:\SmartPrintingRK\Utils\FtpPut.exe Images/product_search.png ftp://192.168.1.144/images/product_search.png user pass
+C:\SmartPrintingRK\Utils\FtpPut.exe Images/barcode_search.png ftp://192.168.1.144/images/barcode_search.png user pass</PostBuildEvent>
   </PropertyGroup>
 </Project>

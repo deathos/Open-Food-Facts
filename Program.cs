@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using Honeywell.Printer;
 
@@ -9,12 +6,8 @@ namespace Open_Food_Facts
 {
     class Program
     {
-        static PrintControl printControl;
-        static Drawing drawing;
-        static Drawing.Image Image;
-        static UI.Canvas canvas;
 
-        static int Main(string[] args)
+        static int Main()
         {
             UserInterfaceHandler.SetStartupLanguageMenu();
             UserInterfaceHandler.AddKeypadEventHandler();
@@ -29,7 +22,7 @@ namespace Open_Food_Facts
             return 0;
         }
 
-        public static void Update(Object obj, UI.Canvas.TimerEventArgs eventArgs)
+        public static void Update(object obj, UI.Canvas.TimerEventArgs eventArgs)
         {
 
         }

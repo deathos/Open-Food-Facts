@@ -1,8 +1,6 @@
 ﻿using Honeywell.Printer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Point = Honeywell.Printer.Point;
 
 namespace Open_Food_Facts
 {
@@ -27,12 +25,13 @@ namespace Open_Food_Facts
                             break;
 
                         case (char)Variables.Key.Right:
+
                             if (Variables.rectangle.Point.X < 220)
                             {
                                 Variables.rectangle.Point = new Point(Variables.rectangle.Point.X + 103, Variables.rectangle.Point.Y);
                             }
                             break;
-                        case (char)Variables.Key.ok:
+                        case (char)Variables.Key.Ok:
                             switch (Variables.rectangle.Point.X)
                             {
                                 case 14:Variables.language = "en";
@@ -53,11 +52,11 @@ namespace Open_Food_Facts
                         case (char)Variables.Key.Down:
 
                             break;
-                        case (char)Variables.Key.feed:
+                        case (char)Variables.Key.Feed:
 
 
                             break;
-                        case (char)Variables.Key.exit:
+                        case (char)Variables.Key.Exit:
                             
                             break;
                     }
@@ -67,7 +66,56 @@ namespace Open_Food_Facts
                 case "search":
                     switch (eventArgs.KeyChar)
                     {
-                        case (char)Variables.Key.ok:
+                        case (char)Variables.Key.Menu:
+
+                            break;
+
+                        case (char)Variables.Key.Left:
+                            if (Variables.rectangle.Point.X > 0)
+                            {
+                                Variables.rectangle.Point = new Point(Variables.rectangle.Point.X - 100, Variables.rectangle.Point.Y);
+                            }
+                            break;
+
+                        case (char)Variables.Key.Right:
+
+                            if (Variables.rectangle.Point.X < 220)
+                            {
+                                Variables.rectangle.Point = new Point(Variables.rectangle.Point.X + 100, Variables.rectangle.Point.Y);
+                            }
+                            break;
+                        case (char)Variables.Key.Ok:
+                            switch (Variables.rectangle.Point.X)
+                            {
+                                case 6:
+                                    //
+                                    break;
+                                case 106:
+                                    //
+
+                                    break;
+                                case 206:
+                                    UserInterfaceHandler.DisplayProduct();
+                                    break;
+                            }
+
+                            break;
+                        case (char)Variables.Key.Down:
+
+                            break;
+                        case (char)Variables.Key.Feed:
+
+
+                            break;
+                        case (char)Variables.Key.Exit:
+                            UserInterfaceHandler.SetStartupLanguageMenu();
+                            break;
+                    }
+                    break;
+                case "product":
+                    switch (eventArgs.KeyChar)
+                    {
+                        case (char)Variables.Key.Menu:
 
                             break;
 
@@ -79,15 +127,22 @@ namespace Open_Food_Facts
 
                             break;
 
-                        case (char)Variables.Key.feed:
+                        case (char)Variables.Key.Up:
 
                             break;
-                        case (char)Variables.Key.exit:
-                            UserInterfaceHandler.SetStartupLanguageMenu();
+
+                        case (char)Variables.Key.Down:
+
+                            break;
+                        case (char)Variables.Key.Feed:
+
+
+                            break;
+                        case (char)Variables.Key.Exit:
+                            UserInterfaceHandler.SetSearchScreen();
+
                             break;
                     }
-                    break;
-                case "product":
                     break;
                 case "general":
                     switch (eventArgs.KeyChar)
@@ -111,11 +166,11 @@ namespace Open_Food_Facts
                         case (char)Variables.Key.Down:
 
                             break;
-                        case (char)Variables.Key.feed:
+                        case (char)Variables.Key.Feed:
 
 
                             break;
-                        case (char)Variables.Key.exit:
+                        case (char)Variables.Key.Exit:
                             Console.WriteLine("Closing");
                             Variables.canvasTimer.Stop();
                             Variables.canvas.Exit();
