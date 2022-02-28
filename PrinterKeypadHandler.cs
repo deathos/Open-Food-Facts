@@ -14,8 +14,32 @@ namespace Open_Food_Facts
                     switch (eventArgs.KeyChar)
                     {
                         case (char)Variables.Key.Menu:
+                            try
+                            {
+                                Console.WriteLine(Variables.drawing.Width+ "--" + Variables.drawing.Height);
+                                Console.WriteLine(Variables.printControl.PrintheadResolution+"---"+ Variables.printControl.PrintheadWidth);
+/*                                Variables.drawing.Clear();
+                                Variables.drawing += new Drawing.Image(10, 10, "/home/user/images/1bit-nutriscore-a.png");
+                                Drawing.Barcode barcode = new Drawing.Barcode(280, 30, "EAN13", "301762042200");
+                                barcode.Height = 30;
+                                barcode.Text.Enabled = true;
+                                barcode.Text.FontName = "Arial";
+                                barcode.Text.Alignment = Drawing.Alignment.CenterBottom;
 
-                            break;
+
+                                Drawing.Image image = new Drawing.Image(5, 5, "/home/user/images/nutella.bmp");
+
+                                Variables.drawing += barcode;
+                                Variables.printControl.PrintFeed(Variables.drawing, 1);*/
+                                break;
+
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e);
+                                throw;
+                            }
+                            
 
                         case (char)Variables.Key.Left:
                             if (Variables.rectangle.Point.X > 14) 
@@ -96,6 +120,7 @@ namespace Open_Food_Facts
                                     break;
                                 case 206:
                                     UserInterfaceHandler.DisplayProduct();
+                                    Console.WriteLine(Variables.drawing.Width + "-"+ Variables.drawing.Height);
                                     break;
                             }
 
@@ -136,6 +161,10 @@ namespace Open_Food_Facts
                             break;
                         case (char)Variables.Key.Feed:
 
+
+                            break;
+                        case (char)Variables.Key.Ok:
+                            PrintingHandler.PrintProduct();
 
                             break;
                         case (char)Variables.Key.Exit:

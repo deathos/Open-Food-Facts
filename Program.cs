@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using Honeywell.Printer;
 
@@ -11,6 +12,7 @@ namespace Open_Food_Facts
         {
             UserInterfaceHandler.SetStartupLanguageMenu();
             UserInterfaceHandler.AddKeypadEventHandler();
+            Directory.CreateDirectory("/home/user/images/temp");
             Variables.canvasTimer.Interval = 1000;
             Variables.canvasTimer.Tick += new UI.Canvas.TimerEventHandler(Update);
             Variables.canvasTimer.Start();

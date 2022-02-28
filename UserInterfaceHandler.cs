@@ -1,5 +1,4 @@
-﻿using System.Drawing;
-using Honeywell.Printer;
+﻿using Honeywell.Printer;
 using Point = Honeywell.Printer.Point;
 using Size = Honeywell.Printer.Size;
 

@@ -18,25 +18,70 @@ namespace Open_Food_Facts
          
          */
 
-        public static List<Products> GetProducts(string xmlurl)
+        public static List<Products> GetProducts(string searchTerm)
         {
-            ServicePointManager.SecurityProtocol = (SecurityProtocolType)48 | (SecurityProtocolType)192 |
-                                                   (SecurityProtocolType)768 | (SecurityProtocolType)3072;
-            var products = GetXmlRequest<Opt>(xmlurl).Products;
-
-            foreach (var product in products)
+            List<Products> products = null;
+            Opt apiResponse = new Opt();
+            try
             {
-                
+                apiResponse = GetXmlRequest<Opt>(
+                   $"https://world.openfoodfacts.org/cgi/search.pl?action=process&search_terms={searchTerm}&fields=code,product_name,image_small_url,quantity,code,nova_group,nutriscore_grade&xml=1");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
 
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    //b.Save(ms, ImageFormat.Png);
-
-                    // use the memory stream to base64 encode..
-                }
             }
 
+            foreach (var item in apiResponse.Products)
+            {
+
+                try
+                {
+                    Console.Write(
+                                CheckString(item.Code) + "\t" +
+                                CheckString(item.ProductName) + "\t" +
+                                CheckString(item.NovaGroup) + "\t" +
+                                CheckString(item.NutriscoreGrade) + "\t" +
+                                CheckString(item.ImageSmallUrl) + "\t" +
+                                CheckString(item.Quantity) + "\n");
+                    if (item.ImageSmallUrl != "")
+                    {
+                        var request = WebRequest.Create(item.ImageSmallUrl);
+                        var response = request.GetResponse();
+                        var responseStream = response.GetResponseStream();
+                        var img = Image.FromStream(responseStream);
+                        img.Save("/home/user/images/temp" + item.Code + ".png", ImageFormat.Png);
+                        item.ImageSmallUrl = item.Code + ".png";
+                        var bitmap2 = new Bitmap(img);
+                        bitmap2 = bitmap2.Clone(new Rectangle(0, 0, bitmap2.Width, bitmap2.Height),
+                            PixelFormat.Format1bppIndexed);
+                        bitmap2.Save("/home/user/images/temp" + item.Code + "-1bit.png", ImageFormat.Png);
+                        products = apiResponse.Products;
+                    }
+                    else
+                    {
+                        item.ImageSmallUrl = "/home/user/images/no-pic.png";
+                    }
+                }
+                catch (WebException ex)
+                {
+                    Console.WriteLine("A web Exception caught");
+                    Console.WriteLine(ex.Message);
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            GC.Collect();
             return products;
+        }
+
+        public static object CheckString(object s)
+        {
+            return s ?? "null";
         }
 
         public static T GetXmlRequest<T>(string requestUrl)
@@ -49,11 +94,7 @@ namespace Open_Food_Facts
                 if (apiResponse.StatusCode == HttpStatusCode.OK)
                 {
                     string xmlOutput;
-                    using (StreamReader sr = new StreamReader(apiResponse.GetResponseStream() ?? throw new InvalidOperationException
-                           {
-                               HelpLink = null,
-                               Source = null
-                           }))
+                    using (StreamReader sr = new StreamReader(apiResponse.GetResponseStream()))
                         xmlOutput = sr.ReadToEnd();
 
                     XmlSerializer xmlSerialize = new XmlSerializer(typeof(T));
@@ -70,36 +111,13 @@ namespace Open_Food_Facts
                     return default;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 // Log error here.
                 return default;
             }
         }
-
-        public static void DownloadFile(string url)
-        {
-            using (var sr = new StreamReader(WebRequest.Create(url)
-                       .GetResponse().GetResponseStream() ?? throw new InvalidOperationException
-                   {
-                       HelpLink = null,
-                       Source = null
-                   }))
-            using (var sw = new StreamWriter(@"C:/Users/H399039/source/repos/Testing_app/bin/Debug/" + url.Substring(url.LastIndexOf('/'))))
-            {
-
-                sw.Write(sr.ReadToEnd());
-            }
-        }
-
-        public static string GetConvertedPngFile(string imagename)
-        {
-            var bitmap = Bitmap.FromFile(imagename);
-            bitmap.Save(Path.GetFileName(imagename) + ".png", ImageFormat.Png);
-            return Path.GetFileName(imagename) + ".png";
-        }
-
-
     }
     [XmlRoot(ElementName = "products")]
     public class Products
