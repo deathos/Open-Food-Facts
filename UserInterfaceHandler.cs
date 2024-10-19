@@ -1,4 +1,5 @@
-﻿using Honeywell.Printer;
+﻿using System;
+using Honeywell.Printer;
 using Point = Honeywell.Printer.Point;
 using Size = Honeywell.Printer.Size;
 
@@ -15,7 +16,7 @@ namespace Open_Food_Facts
 
         public static void SetStartupDateMenu()
         {
-            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/date.png");
+            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/openfoodfacts/date.png");
            // Variables.canvas += new UI.Canvas.Text(55, 120, ConfigurationManager.AppSettings.Get("ar_date_title"), "Arial", 22,Variables.black);
             Variables.canvas += new UI.Canvas.Text(55, 88, Variables.configuration.GetParameter("System Settings,General,Date"), "Univers", 22, Variables.black);
 
@@ -24,7 +25,7 @@ namespace Open_Food_Facts
         {
             Variables.currentMenu = "region";
             Variables.canvas.Clear();
-            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/languages.png");
+            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/openfoodfacts/languages.png");
             Variables.rectangle.Size = new Size(80, 115);
             Variables.rectangle.Point = new Point(14, 67);
             Variables.canvas += Variables.rectangle;
@@ -36,7 +37,7 @@ namespace Open_Food_Facts
         {
             Variables.currentMenu = "search";
             Variables.canvas.Clear();
-            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/search.png");
+            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/openfoodfacts/search.png");
 
             Variables.rectangle.Size = new Size(105, 115);
             Variables.rectangle.Point = new Point(6, 80);
@@ -92,11 +93,25 @@ namespace Open_Food_Facts
         {
             Variables.currentMenu = "barcodeSearch";
             Variables.canvas.Clear();
-            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/barcode_search.png");
-            Variables.canvas += new UI.Canvas.Text(6, 84, Variables.appDictionary[Variables.language]+ "scan_barcode");
-            Variables.inputText = new UI.Canvas.Text(98,140,"");
+            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/openfoodfacts/barcode_search.png");
+            Variables.canvas += new UI.Canvas.Text(60, 100, Variables.appDictionary[Variables.language + "_scan_barcode"], "Arial", 18,Variables.black){Layer = 1};
+            Variables.inputText = new UI.Canvas.Text(98,140,"Scan a barcode", "Arial", 22,Variables.black) { Layer = 1 };
+            Variables.canvas += Variables.inputText;
+/*            UsbCommunicationHandler.ConnectAutoHunt();
+            Variables.canvasTimer.Stop();
+            Variables.canvasTimer.Tick += new UI.Canvas.TimerEventHandler(UsbCommunicationHandler.GetStream);
+            Variables.canvasTimer.Start();*/
         }
 
+
+        public static void SetProductNameSearchScreen()
+        {
+            Variables.currentMenu = "ProductNameSearch";
+            Variables.canvas.Clear();
+            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/openfoodfacts/product_search.png");
+            Variables.canvas += new UI.Canvas.Text(6, 84, Variables.appDictionary[Variables.language] + "product_search");
+            Variables.inputText = new UI.Canvas.Text(98, 140, "");
+        }
 
 
 
@@ -106,18 +121,18 @@ namespace Open_Food_Facts
 
         }
 
-        public static void DisplayProduct()
+        public static void DisplayProduct(Products product, int index)
         {
             Variables.currentMenu = "product";
             Variables.canvas.Clear();
-            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/product_display.png");
-            Variables.canvas += new UI.Canvas.Text(3, 0, "Nutella pate a tartiner noisettes-cacao t.750 pot de 750", "Arial", 20, Variables.black);
-            Variables.canvas += new UI.Canvas.Text(170, 38, "400g", "Arial", 30, Variables.black);
-            Variables.canvas += new UI.Canvas.Image(3, 32, "/home/user/images/front_en.327.200.png") {Layer = 1, Size = new Size(154,163)};
-            Variables.canvas += new UI.Canvas.Image(160, 92, "/home/user/images/nutriscore-e.png") { Layer = 2, Size = new Size(145, 80) };
-            Variables.canvas += new UI.Canvas.Image(270, 32, "/home/user/images/nova-group-4.png") { Layer = 3, Size = new Size(40,68)};
-            Variables.canvas += new UI.Canvas.Text(165, 167, "3017620422003", "Arial", 20, Variables.black);
-            Variables.canvas += new UI.Canvas.Text(12,206,"01/24","Arial",20,Variables.black);
+            Variables.canvas += new UI.Canvas.Image(0, 0, "/home/user/images/openfoodfacts/product_display.png");
+            Variables.canvas += new UI.Canvas.Text(3, 0, product.ProductName, "Arial", 20, Variables.black);
+            Variables.canvas += new UI.Canvas.Text(170, 38, product.Quantity, "Arial", 30, Variables.black);
+            Variables.canvas += new UI.Canvas.Image(3, 32, "/home/user/images/openfoodfacts/local/"+ product.ImageSmallUrl+".png") {Layer = 1, Size = new Size(154,163)};
+            Variables.canvas += new UI.Canvas.Image(160, 92, "/home/user/images/openfoodfacts/nutriscore-"+ product.NutriscoreGrade+ ".png") { Layer = 2, Size = new Size(145, 80) };
+            Variables.canvas += new UI.Canvas.Image(270, 32, "/home/user/images/openfoodfacts/nova-group-" + product.NovaGroup + ".png") { Layer = 3, Size = new Size(40,68)};
+            Variables.canvas += new UI.Canvas.Text(165, 167, product.Code, "Arial", 20, Variables.black);
+            Variables.canvas += new UI.Canvas.Text(12,206,index.ToString()+"/16","Arial",20,Variables.black);
         }
     }
 }

@@ -50,6 +50,9 @@
     <Reference Include="HoneywellPrinter">
       <HintPath>..\..\..\..\Products\Software\SmartPrintingRK-10.16.019189(1)\SmartPrintingRK\Dll\HoneywellPrinter.dll</HintPath>
     </Reference>
+    <Reference Include="Mono.Data.Sqlite">
+      <HintPath>..\..\..\..\..\..\SmartPrintingRK\Dll\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -67,6 +70,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResourcesHandler.cs" />
+    <Compile Include="SQLiteHandler.cs" />
     <Compile Include="UsbCommunicationHandler.cs" />
     <Compile Include="UserInterfaceHandler.cs" />
     <Compile Include="Variables.cs" />
@@ -87,9 +91,6 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>C:\SmartPrintingRK\Utils\FtpPut.exe $(TargetFileName) ftp://192.168.1.144/apps/$(TargetFileName) user pass
-C:\SmartPrintingRK\Utils\FtpPut.exe Images/search.png ftp://192.168.1.144/images/search.png user pass
-C:\SmartPrintingRK\Utils\FtpPut.exe Images/db_search.png ftp://192.168.1.144/images/db_search.png user pass
-C:\SmartPrintingRK\Utils\FtpPut.exe Images/product_search.png ftp://192.168.1.144/images/product_search.png user pass
-C:\SmartPrintingRK\Utils\FtpPut.exe Images/barcode_search.png ftp://192.168.1.144/images/barcode_search.png user pass</PostBuildEvent>
+</PostBuildEvent>
   </PropertyGroup>
 </Project>

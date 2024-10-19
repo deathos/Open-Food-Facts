@@ -51,17 +51,17 @@ namespace Open_Food_Facts
                         var response = request.GetResponse();
                         var responseStream = response.GetResponseStream();
                         var img = Image.FromStream(responseStream);
-                        img.Save("/home/user/images/temp" + item.Code + ".png", ImageFormat.Png);
+                        img.Save("/home/user/images/openfoodfacts/temp" + item.Code + ".png", ImageFormat.Png);
                         item.ImageSmallUrl = item.Code + ".png";
                         var bitmap2 = new Bitmap(img);
                         bitmap2 = bitmap2.Clone(new Rectangle(0, 0, bitmap2.Width, bitmap2.Height),
                             PixelFormat.Format1bppIndexed);
-                        bitmap2.Save("/home/user/images/temp" + item.Code + "-1bit.png", ImageFormat.Png);
+                        bitmap2.Save("/home/user/images/openfoodfacts/temp" + item.Code + "-1bit.png", ImageFormat.Png);
                         products = apiResponse.Products;
                     }
                     else
                     {
-                        item.ImageSmallUrl = "/home/user/images/no-pic.png";
+                        item.ImageSmallUrl = "/home/user/images/openfoodfacts/no-pic.png";
                     }
                 }
                 catch (WebException ex)
@@ -124,7 +124,7 @@ namespace Open_Food_Facts
     {
 
         [XmlAttribute(AttributeName = "code")]
-        public double Code { get; set; }
+        public string Code { get; set; }
 
         [XmlAttribute(AttributeName = "image_small_url")]
         public string ImageSmallUrl { get; set; }

@@ -18,8 +18,8 @@ namespace Open_Food_Facts
                             {
                                 Console.WriteLine(Variables.drawing.Width+ "--" + Variables.drawing.Height);
                                 Console.WriteLine(Variables.printControl.PrintheadResolution+"---"+ Variables.printControl.PrintheadWidth);
-/*                                Variables.drawing.Clear();
-                                Variables.drawing += new Drawing.Image(10, 10, "/home/user/images/1bit-nutriscore-a.png");
+/*                              Variables.drawing.Clear();
+                                Variables.drawing += new Drawing.Image(10, 10, "/home/user/images/openfoodfacts/1bit-nutriscore-a.png");
                                 Drawing.Barcode barcode = new Drawing.Barcode(280, 30, "EAN13", "301762042200");
                                 barcode.Height = 30;
                                 barcode.Text.Enabled = true;
@@ -27,7 +27,7 @@ namespace Open_Food_Facts
                                 barcode.Text.Alignment = Drawing.Alignment.CenterBottom;
 
 
-                                Drawing.Image image = new Drawing.Image(5, 5, "/home/user/images/nutella.bmp");
+                                Drawing.Image image = new Drawing.Image(5, 5, "/home/user/images/openfoodfacts/nutella.bmp");
 
                                 Variables.drawing += barcode;
                                 Variables.printControl.PrintFeed(Variables.drawing, 1);*/
@@ -95,15 +95,16 @@ namespace Open_Food_Facts
                             break;
 
                         case (char)Variables.Key.Left:
-                            if (Variables.rectangle.Point.X > 0)
+                            Console.WriteLine("Click Left -- X = "+ Variables.rectangle.Point.X);
+                            if (Variables.rectangle.Point.X > 6)
                             {
                                 Variables.rectangle.Point = new Point(Variables.rectangle.Point.X - 100, Variables.rectangle.Point.Y);
                             }
                             break;
 
                         case (char)Variables.Key.Right:
-
-                            if (Variables.rectangle.Point.X < 220)
+                            Console.WriteLine("Click Right -- X = " + Variables.rectangle.Point.X);
+                            if (Variables.rectangle.Point.X < 206)
                             {
                                 Variables.rectangle.Point = new Point(Variables.rectangle.Point.X + 100, Variables.rectangle.Point.Y);
                             }
@@ -113,13 +114,14 @@ namespace Open_Food_Facts
                             {
                                 case 6:
                                     //
+                                    UserInterfaceHandler.SetBarcodeSearchScreen();
                                     break;
                                 case 106:
                                     //
-
+                                    UserInterfaceHandler.SetProductNameSearchScreen();
                                     break;
                                 case 206:
-                                    UserInterfaceHandler.DisplayProduct();
+                                    UserInterfaceHandler.DisplayProduct(Variables.localDbProductsList[Variables.currentIndex], Variables.currentIndex);
                                     Console.WriteLine(Variables.drawing.Width + "-"+ Variables.drawing.Height);
                                     break;
                             }
@@ -137,6 +139,33 @@ namespace Open_Food_Facts
                             break;
                     }
                     break;
+                case "barcodeSearch":
+                    switch (eventArgs.KeyChar)
+                    {
+                        case (char)Variables.Key.Menu:
+                            break;
+                        case (char)Variables.Key.Left:
+
+                            break;
+
+                        case (char)Variables.Key.Right:
+
+                            break;
+                        case (char)Variables.Key.Ok:
+
+                            break;
+                        case (char)Variables.Key.Down:
+
+                            break;
+                        case (char)Variables.Key.Feed:
+
+
+                            break;
+                        case (char)Variables.Key.Exit:
+                            UserInterfaceHandler.SetSearchScreen();
+                            break;
+                    }
+                    break;
                 case "product":
                     switch (eventArgs.KeyChar)
                     {
@@ -145,11 +174,29 @@ namespace Open_Food_Facts
                             break;
 
                         case (char)Variables.Key.Left:
+                            if (Variables.currentIndex > 0)
+                            {
+                                Variables.currentIndex--;
+                            }
 
+                            if (Variables.currentIndex == 0)
+                            {
+                                Variables.currentIndex = 15;
+                            }
+                            UserInterfaceHandler.DisplayProduct(Variables.localDbProductsList[Variables.currentIndex], Variables.currentIndex);
                             break;
 
                         case (char)Variables.Key.Right:
+                            if (Variables.currentIndex<=14)
+                            {
+                                Variables.currentIndex++;
+                            }
 
+                            if (Variables.currentIndex == 15)
+                            {
+                                Variables.currentIndex = 0;
+                            }
+                            UserInterfaceHandler.DisplayProduct(Variables.localDbProductsList[Variables.currentIndex], Variables.currentIndex);
                             break;
 
                         case (char)Variables.Key.Up:
@@ -164,7 +211,7 @@ namespace Open_Food_Facts
 
                             break;
                         case (char)Variables.Key.Ok:
-                            PrintingHandler.PrintProduct();
+                            PrintingHandler.PrintProduct(Variables.currentIndex);
 
                             break;
                         case (char)Variables.Key.Exit:

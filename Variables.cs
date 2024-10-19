@@ -10,13 +10,15 @@ namespace Open_Food_Facts
         public static UI.Canvas.Image backGround = new UI.Canvas.Image();
         public static UI.Canvas.Timer canvasTimer = new UI.Canvas.Timer();
         public static UI.Canvas.Text inputText;
+        public static Communication.Autohunt autohunt;
         public static Color black = new Color(0, 0, 0);
         public static Color bluehighlighter = new Color(33,101,187,55);
         public static UI.Canvas.Rectangle rectangle= new UI.Canvas.Rectangle(14, 67, 80, 115, bluehighlighter);
         public static string currentMenu;
-
+        public static List<Products> localDbProductsList = new List<Products>();
         public static PrintControl printControl = new PrintControl();
         public static Drawing drawing = new Drawing();
+        public static int currentIndex = 0;
 
         public enum Key
         {
